@@ -1,15 +1,19 @@
 ///////////////////////////REQUIRES/////////////////////////////////
 
 var express = require('express');
+const PORT = process.env.PORT || 5000;
 var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var bodyParser = require("body-parser");
 const maindeck = require("./cards.json")
 
+
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(express.static("public"));
 app.set("view engine", "ejs");
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
 
 ///////////////////////////////////////////Server Variables/////////////////////////////////////
 var playerList = [];
@@ -253,9 +257,9 @@ app.get("*", function(req,res) {
   res.send("Error, page not found");
 })
 
-http.listen(3024 ,function(){
-  console.log('listening on *:3024');
-});
+// http.listen(3024 ,function(){
+//   console.log('listening on *:3024');
+// });
 
 ///////////////////////////////////////////////////Functions/////////////////////////////////////////
 
